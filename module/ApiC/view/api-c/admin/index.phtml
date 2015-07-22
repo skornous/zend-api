@@ -1,0 +1,48 @@
+<h2>Admin page</h2>
+<?php
+	if (isset($this->alert) && !empty($this->alert)):
+?>
+		<section class="popup">
+			<div class="alert alert-<?php echo $this->alert['type']; ?> alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<?php echo $this->alert['content']; ?>
+			</div>
+		</section>
+<?php
+	endif;
+	if(isset($this->countryList) && !empty($this->countryList)):
+?>
+<section class="countries">
+	<a class="btn btn-primary" href="<?php echo $this->url('apic-admin'); ?>/add">Add a country</a>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>Code</th>
+			<th>Alpha2</th>
+			<th>Alpha3</th>
+			<th>Nom EN</th>
+			<th>Nom FR</th>
+			<th>Devise</th>
+			<th>Taux TVA</th>
+			<!--				<th>Edit</th>-->
+			<!--				<th>Delete</th>-->
+		</tr>
+		</thead>
+		<tbody>
+		<?php foreach ($this->countryList->getCountries() as $country): ?>
+			<tr>
+				<td><?php echo $country->getCode(); ?></td>
+				<td><?php echo $country->getAlpha2(); ?></td>
+				<td><?php echo $country->getAlpha3(); ?></td>
+				<td><?php echo $country->getNomEnGb(); ?></td>
+				<td><?php echo $country->getNomFrFr(); ?></td>
+				<td><?php echo (null === $country->getDevise()) ? "&empty;" : $country->getDevise(); ?></td>
+				<td><?php echo (null === $country->getTauxTva()) ? "&empty;" : $country->getTauxTva(); ?></td>
+				<td><a class="btn btn-primary" href="<?php echo $this->url('apic-admin'); ?>/edit/<?php echo $country->getCode(); ?>">Edit</a></td>
+				<td><a class="btn btn-danger" href="<?php echo $this->url('apic-admin'); ?>/delete/<?php echo $country->getCode(); ?>">Delete</a></td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+</section>
+<?php endif; ?>

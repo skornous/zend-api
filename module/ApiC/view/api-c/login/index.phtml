@@ -1,0 +1,11 @@
+<h2>Connect</h2>
+<section class="connect">
+	<p>
+		<?php
+			$form = $this->connectForm;
+			$form->setAttribute("class", "form-horizontal");
+			$form->setAttribute('action', $this->url(null, ['controller' => 'login', 'action' => 'process']));
+			echo $this->form()->render($form);
+		?>
+	</p>
+</section>
